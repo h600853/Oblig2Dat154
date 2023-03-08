@@ -14,6 +14,7 @@ namespace SpaceSim
         private String objectColour;
         private double x;
         private double y;
+        private int orbitalSpeed;
 
         public String Name
         {
@@ -55,7 +56,11 @@ namespace SpaceSim
             get { return y; }
             set { y = value; }
         }
-
+        public int OrbitalSpeed
+        {
+            get { return orbitalSpeed; }
+            set { orbitalSpeed = value; }
+        }
 
 
         public SpaceObject(String name, double orbitalRadius, double orbitalPeriod, double objectRadius, double rotationalPeriod, String objectColour )
@@ -68,6 +73,7 @@ namespace SpaceSim
             this.objectColour = objectColour;
             this.x = 0;
             this.y = 0;
+            this.orbitalSpeed = 1;
             
         }
         public virtual void Draw()
@@ -75,12 +81,12 @@ namespace SpaceSim
             Console.WriteLine($"Name: {name}, OrbitalRadius: {orbitalRadius}, OrbitalPeriod: {orbitalPeriod}, " +
                   $"ObjectRadius: {objectRadius}, RotationalPeriod: {rotationalPeriod}, ObjectColour: {objectColour}, Position(X = {x}, Y = {y}).");
         }
-        public virtual void CalculatePosition(int numberofdays)
+        public virtual void CalculatePosition(int numberofdays, int orbitalspeed)
         {
-            double angle = (numberofdays / orbitalPeriod) * (2 * Math.PI);
+            double angle = ((numberofdays * orbitalspeed) / orbitalPeriod) * (2 * Math.PI);
             double angleInRadiants = angle * (Math.PI / 100);
-             x = orbitalRadius * Math.Cos(angleInRadiants);
-             y = orbitalRadius * Math.Sin(angleInRadiants);
+             x = orbitalRadius * Math.Cos(angleInRadiants );
+             y = orbitalRadius * Math.Sin(angleInRadiants );
         
            
         }
@@ -100,6 +106,7 @@ namespace SpaceSim
         {
             return (int)this.ObjectRadius*scale;
         }
+       
 
     }
     public class Star : SpaceObject

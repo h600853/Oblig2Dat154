@@ -4,20 +4,27 @@ namespace Oblig2
 {
     public class Program
     {
+           delegate void PrintDelegate(String message);
+        static void PrintPlanetMessage(String planet)
+        {
+            Console.WriteLine("You entered " + planet + " :");
+        }
         public static void Main()
         {
+            PrintDelegate printDelegate = new PrintDelegate(PrintPlanetMessage);
+
             Star sun = new Star("Sun", 0, 0, 696.340, 26, "yellow");
             //name, orbitalRadius, orbitalPeriod, objectRadius, rotationalPeriod, objectColour.
             //orbital radius in million km 
-            //object radius in km 
+            //object radius in km / 1000
             Planet mercury = new Planet("Mercury", 57.91, 87.97, 2.440, 59, "DarkGray");
             Planet venus = new Planet("Venus", 108.2, 224.7, 6.052, -243, "Yellow");
             Planet earth = new Planet("Earth", 149.6, 365.2, 6.371, 24, "Blue");
             Planet mars = new Planet("Mars", 228, 687, 3.390, 25, "Red");
-            Planet jupiter = new Planet("Jupiter", 778.5,  4.331, 69.911, 10, "Orange");
-            Planet saturn = new Planet("Saturn", 1400000000, 10747.0, 58.232, 11, "Yellow");
-            Planet uranus = new Planet("Uranus", 2870000000, 30.589, 25.362, -17, "LightBlue");
-            Planet neptune = new Planet("Neptune", 4500000000, 59800.0, 24.622, 16, "DarkBlue");
+            Planet jupiter = new Planet("Jupiter", 778.5,  4332, 69.911, 10, "Orange");
+            Planet saturn = new Planet("Saturn", 1400, 10747, 58.232, 11, "Yellow");
+            Planet uranus = new Planet("Uranus", 2870, 30589, 25.362, -17, "LightBlue");
+            Planet neptune = new Planet("Neptune", 4500, 59800, 24.622, 16, "DarkBlue");
 
             DwarfPlanet ceres = new DwarfPlanet("Ceres", 413.8, 4.6, 487.3, 9.07, "Gray");
             DwarfPlanet pluto = new DwarfPlanet("Pluto", 2376.6, 90560.0, 1188.3, -6.39, "Brown");
@@ -62,140 +69,141 @@ namespace Oblig2
             int time = int.Parse(input);
             Console.WriteLine("Enter the name of a Planet: ");
             String planet = Console.ReadLine().ToLower();
+            int orbitalSpeed = 1;
 
             switch(planet)
             {
                 case "mercury":
                 {
-                        Console.WriteLine("You entered Mercury: ");
-                        mercury.CalculatePosition(time);
+                        printDelegate("Mercury");
+                        mercury.CalculatePosition(time,orbitalSpeed);
                         mercury.Draw();
                 break;
                 }
                 case "venus":
                     {
-                        Console.WriteLine("You entered Venus: ");
-                        venus.CalculatePosition(time);
+                        printDelegate("Venus");
+                        venus.CalculatePosition(time,orbitalSpeed);
                         venus.Draw();   
 
                         Console.WriteLine("Moons: ");
-                        europa.CalculatePosition(time); 
+                        europa.CalculatePosition(time,orbitalSpeed); 
                         europa.Draw();
-                        io.CalculatePosition(time); 
+                        io.CalculatePosition(time, orbitalSpeed); 
                         io.Draw();  
-                        ganymedes.CalculatePosition(time);  
+                        ganymedes.CalculatePosition(time, orbitalSpeed);  
                         ganymedes.Draw();
                     }
                         break;
                 case "earth":
                     {
-                        Console.WriteLine("You entered Earth: ");
-                          earth.CalculatePosition(time);
+                        printDelegate("Earth");
+                          earth.CalculatePosition(time, orbitalSpeed);    
                         earth.Draw();
                       
                         Console.WriteLine("Moons: ");
-                        moon.CalculatePosition(time);   
+                        moon.CalculatePosition(time, orbitalSpeed);   
                         moon.Draw();
                         
                     }
                         break;
                 case "mars":
                     {
-                        Console.WriteLine("You entered Mars: ");    
-                            mars.CalculatePosition(time);   
+                            printDelegate("Mars"); 
+                            mars.CalculatePosition(time, orbitalSpeed);   
                             mars.Draw();    
                             
                     }
                         break;
                 case "jupiter":
                     {
-                        Console.WriteLine("You entered Jupiter: ");
-                         jupiter.CalculatePosition(time);
+                        printDelegate("Jupiter");
+                         jupiter.CalculatePosition(time, orbitalSpeed);
                          jupiter.Draw();    
                         
                     }
                         break;
                 case "saturn":
                     {
-                        Console.WriteLine("You entered Saturn: ");
-                        saturn.CalculatePosition(time); 
+                        printDelegate("Saturn");
+                        saturn.CalculatePosition(time, orbitalSpeed); 
                         saturn.Draw();  
 
                         Console.WriteLine("Moons: ");
-                        titan.CalculatePosition(time);  
+                        titan.CalculatePosition(time, orbitalSpeed);  
                         titan.Draw(); 
-                        enceladus.CalculatePosition(time);  
+                        enceladus.CalculatePosition(time, orbitalSpeed);  
                         enceladus.Draw();
-                        mimas.CalculatePosition(time);  
+                        mimas.CalculatePosition(time, orbitalSpeed);  
                         mimas.Draw();
                     }
                         break;
                 case "uranus":
                     {
-                        Console.WriteLine("You entered Uranus: ");
-                        uranus.CalculatePosition(time); 
+                        printDelegate("Uranus");
+                        uranus.CalculatePosition(time, orbitalSpeed); 
                        uranus.Draw();   
 
                         Console.WriteLine("Moons: ");
-                        miranda.CalculatePosition(time);    
+                        miranda.CalculatePosition(time, orbitalSpeed);    
                         miranda.Draw();
-                        titania.CalculatePosition(time);    
+                        titania.CalculatePosition(time, orbitalSpeed);    
                         titania.Draw();
-                        oberon.CalculatePosition(time); 
+                        oberon.CalculatePosition(time, orbitalSpeed); 
                         oberon.Draw();  
                     }
                         break;
                 case "neptune":
                     {
-                      Console.WriteLine("You entered Neptune: ");  
-                        neptune.CalculatePosition(time);    
+                        printDelegate("Neptune");
+                        neptune.CalculatePosition(time, orbitalSpeed);    
                         neptune.Draw();
 
                         Console.WriteLine("Moons: ");
-                        triton.CalculatePosition(time); 
+                        triton.CalculatePosition(time, orbitalSpeed); 
                         triton.Draw();
                     }
                         break;
                 default:
                     {
                        sun.Draw();
-                        mercury.CalculatePosition(time);
+                        mercury.CalculatePosition(time, orbitalSpeed);
                         mercury.Draw();
-                        venus.CalculatePosition(time);
+                        venus.CalculatePosition(time, orbitalSpeed);
                         venus.Draw();
-                        europa.CalculatePosition(time);
+                        europa.CalculatePosition(time, orbitalSpeed);
                         europa.Draw();
-                        io.CalculatePosition(time);
+                        io.CalculatePosition(time, orbitalSpeed);
                         io.Draw();
-                        ganymedes.CalculatePosition(time);
+                        ganymedes.CalculatePosition(time, orbitalSpeed);
                         ganymedes.Draw();
-                        earth.CalculatePosition(time);
+                        earth.CalculatePosition(time, orbitalSpeed);
                         earth.Draw();
-                        moon.CalculatePosition(time);
+                        moon.CalculatePosition(time, orbitalSpeed);
                         moon.Draw();
-                        mars.CalculatePosition(time);
+                        mars.CalculatePosition(time, orbitalSpeed);
                         mars.Draw();
-                        jupiter.CalculatePosition(time);
+                        jupiter.CalculatePosition(time, orbitalSpeed);
                         jupiter.Draw();
-                        saturn.CalculatePosition(time);
+                        saturn.CalculatePosition(time, orbitalSpeed);
                         saturn.Draw();
-                        titan.CalculatePosition(time);
+                        titan.CalculatePosition(time, orbitalSpeed);
                         titan.Draw();
-                        enceladus.CalculatePosition(time);
+                        enceladus.CalculatePosition(time, orbitalSpeed);
                         enceladus.Draw();
-                        mimas.CalculatePosition(time);
+                        mimas.CalculatePosition(time, orbitalSpeed);
                         mimas.Draw();
-                        uranus.CalculatePosition(time);
+                        uranus.CalculatePosition(time,orbitalSpeed);
                         uranus.Draw();
-                        miranda.CalculatePosition(time);
+                        miranda.CalculatePosition(time, orbitalSpeed);
                         miranda.Draw();
-                        titania.CalculatePosition(time);
+                        titania.CalculatePosition(time, orbitalSpeed);
                         titania.Draw();
-                        oberon.CalculatePosition(time);
+                        oberon.CalculatePosition(time, orbitalSpeed);
                         oberon.Draw();
-                        neptune.CalculatePosition(time);
+                        neptune.CalculatePosition(time, orbitalSpeed);
                         neptune.Draw();
-                        triton.CalculatePosition(time);
+                        triton.CalculatePosition(time, orbitalSpeed);
                         triton.Draw();
                     }
                     break;
