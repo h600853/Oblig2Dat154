@@ -219,8 +219,8 @@ namespace WinFormsApp3
                 {
             foreach (SpaceObject planet in planets)
             {
-                int orbitSize = (int)(planet.OrbitalRadius / zoom);
-                int objectSize = (int)(planet.ObjectRadius / zoom);
+                int orbitSize = (int)(planet.OrbitalRadius * zoom);
+                int objectSize = (int)(planet.ObjectRadius * zoom);
                 Rectangle rect = new Rectangle(middleX - orbitSize, middleY - orbitSize, orbitSize * 2, orbitSize * 2);
                 g.DrawEllipse(Pens.Black, rect);
                 }
